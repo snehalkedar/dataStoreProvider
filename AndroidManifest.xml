@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="tv.techm.data.provider">
+	
+	<permission android:name="tv.techm.data.provider.permission.READ"
+				android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
+      			android:protectionLevel="normal"
+      			android:label="content_data_read_settings"
+      			android:description="@string/content_data_desc_read_settings"/>
+      			
+    <permission android:name="tv.techm.data.provider.permission.WRITE"
+      			android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
+      			android:protectionLevel="normal"
+      			android:label="content_data_write_settings"
+      			android:description="@string/content_data_desc_write_settings"/>
+
+	<uses-permission android:name="tv.techm.data.provider.permission.READ"/>
+	<uses-permission android:name="tv.techm.data.provider.permission.WRITE"/>
+	
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+	<application>
+		<provider android:name="DataProvider" android:authorities="tv.techm.data.provider"
+			  android:exported="true"
+			android:readPermission="tv.techm.data.provider.permission.READ"
+			android:writePermission="tv.techm.data.provider.permission.WRITE">
+		</provider>
+
+		<receiver android:name="DataProviderReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+	</application>
+</manifest>
